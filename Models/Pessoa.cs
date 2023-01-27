@@ -1,21 +1,42 @@
-namespace DesafioProjetoHospedagem.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-public class Pessoa
+namespace Desafio_2.Models
 {
-    public Pessoa() { }
-
-    public Pessoa(string nome)
+    public class Pessoa
     {
-        Nome = nome;
-    }
+        public Pessoa(string name, string lastName) 
+        {
+            this.Name = name;
+            this.LastName = lastName;
+        }
+        private string _name = "";
+        public string Name { 
+            get => _name; 
 
-    public Pessoa(string nome, string sobrenome)
-    {
-        Nome = nome;
-        Sobrenome = sobrenome;
-    }
+            set {
+                if (value == "") {
+                    throw new ArgumentException("O nome não pode ser vazio.");
+                } else {
+                    _name = value;
+                }
+            }
+            }
 
-    public string Nome { get; set; }
-    public string Sobrenome { get; set; }
-    public string NomeCompleto => $"{Nome} {Sobrenome}".ToUpper();
+        private string _lastName = "";
+        public string LastName { 
+            get => _lastName; 
+            set {
+                if (value == "") {
+                    throw new ArgumentException("O sobrenome não pode ser vazio.");
+                } else {
+                    _lastName = value;
+                }
+            }
+            }
+
+        
+    }
 }

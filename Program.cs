@@ -1,25 +1,20 @@
-﻿using System.Text;
-using DesafioProjetoHospedagem.Models;
+﻿using Desafio_2.Models;
+using System.Text;
 
-Console.OutputEncoding = Encoding.UTF8;
+Pessoa p1 = new Pessoa("Gabriel", "Delgado");
+Pessoa p2 = new Pessoa("Gabriela", "Maria");
 
-// Cria os modelos de hóspedes e cadastra na lista de hóspedes
-List<Pessoa> hospedes = new List<Pessoa>();
+List<Pessoa> guests = new List<Pessoa>();
 
-Pessoa p1 = new Pessoa(nome: "Hóspede 1");
-Pessoa p2 = new Pessoa(nome: "Hóspede 2");
+guests.Add(p1);
+guests.Add(p2);
 
-hospedes.Add(p1);
-hospedes.Add(p2);
+Suite premiumSuite = new Suite("Premium", 1, 40.5M);
 
-// Cria a suíte
-Suite suite = new Suite(tipoSuite: "Premium", capacidade: 2, valorDiaria: 30);
+Reserva bestWeekendEver = new Reserva(10);
+bestWeekendEver.GuestsRegistration(guests);
+bestWeekendEver.SuiteRegistration(premiumSuite);
 
-// Cria uma nova reserva, passando a suíte e os hóspedes
-Reserva reserva = new Reserva(diasReservados: 5);
-reserva.CadastrarSuite(suite);
-reserva.CadastrarHospedes(hospedes);
+Console.WriteLine($"Hóspedes: {bestWeekendEver.GetGuestsNumber()}");
+Console.WriteLine($"Total a pagar: {bestWeekendEver.CalculateReservationPrice()}");
 
-// Exibe a quantidade de hóspedes e o valor da diária
-Console.WriteLine($"Hóspedes: {reserva.ObterQuantidadeHospedes()}");
-Console.WriteLine($"Valor diária: {reserva.CalcularValorDiaria()}");

@@ -1,60 +1,45 @@
-namespace DesafioProjetoHospedagem.Models
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Desafio_2.Models
 {
     public class Reserva
     {
-        public List<Pessoa> Hospedes { get; set; }
-        public Suite Suite { get; set; }
-        public int DiasReservados { get; set; }
+        private List<Pessoa> _guests = new List<Pessoa>();
 
-        public Reserva() { }
+        private Suite _suite = new Suite("", 0, 0M);
 
-        public Reserva(int diasReservados)
+        public Reserva(int reservedDays) 
         {
-            DiasReservados = diasReservados;
+            this.ReservedDays = reservedDays;
+   
+        }
+        public int ReservedDays{get; set;}
+
+        public void GuestsRegistration(List<Pessoa> guests) {
+            _guests = guests;
         }
 
-        public void CadastrarHospedes(List<Pessoa> hospedes)
-        {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
-            {
-                Hospedes = hospedes;
-            }
-            else
-            {
-                // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
+        public void SuiteRegistration(Suite suite) {
+            if (suite.Capacity >= _guests.Count) {
+                _suite = suite;
+            } else {
+                throw new NotSupportedException("Suite incompatível com o número de hóspedes.");
             }
         }
 
-        public void CadastrarSuite(Suite suite)
-        {
-            Suite = suite;
+        public int GetGuestsNumber() {
+            return _guests.Count;
         }
 
-        public int ObterQuantidadeHospedes()
-        {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
-        }
-
-        public decimal CalcularValorDiaria()
-        {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
-
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
-            {
-                valor = 0;
+        public decimal CalculateReservationPrice() {
+            if (ReservedDays >= 10) {
+                return _suite.DailyRate * ReservedDays * 0.9M;
+            } else {
+                return _suite.DailyRate * ReservedDays;
             }
-
-            return valor;
         }
     }
 }

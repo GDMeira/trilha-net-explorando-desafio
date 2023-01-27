@@ -1,18 +1,22 @@
-namespace DesafioProjetoHospedagem.Models
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Desafio_2.Models
 {
     public class Suite
     {
-        public Suite() { }
-
-        public Suite(string tipoSuite, int capacidade, decimal valorDiaria)
+        public Suite(string suiteType, int capacity, decimal dailyRate)
         {
-            TipoSuite = tipoSuite;
-            Capacidade = capacidade;
-            ValorDiaria = valorDiaria;
+            SuiteType = suiteType;
+            Capacity = capacity;
+            DailyRate = dailyRate;
         }
+        private string SuiteType;
 
-        public string TipoSuite { get; set; }
-        public int Capacidade { get; set; }
-        public decimal ValorDiaria { get; set; }
+        public int Capacity {get;}
+
+        public decimal DailyRate {get;}
     }
 }
